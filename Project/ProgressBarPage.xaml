@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Project.ProgressBarPage"
+             Title="ProgressBarPage">
+    <VerticalStackLayout
+        BackgroundColor="Lavender"
+        Spacing="240"
+        VerticalOptions="FillAndExpand">
+
+        <Label 
+            Margin="50"
+            x:Name="ProcessLabel"
+            Text="Welcome to progress bar indicator!"
+            HorizontalTextAlignment="Center"
+            FontSize="24"
+            VerticalOptions="Center"/>
+
+        <HorizontalStackLayout 
+            HorizontalOptions="Center"
+            Spacing="15">
+            <ProgressBar 
+                x:Name="ProgressBarIndecator"
+                WidthRequest="200"
+                Progress="0.0"
+                ScaleY="2"
+                ProgressColor="LimeGreen"
+                HorizontalOptions="Center"/>
+
+            <Label x:Name="ProgressResult" Text="50%" TextColor="LimeGreen"/>
+        </HorizontalStackLayout>
+
+
+        <HorizontalStackLayout
+            Spacing="20"
+            HorizontalOptions="Center">
+
+            <Button 
+                x:Name="StartButton"
+                Clicked="OnStart"
+                Text="Start"
+                WidthRequest="100"/>
+
+            <Button
+                x:Name="CancelButton"
+                Clicked="OnCanceled"
+                Text="Cancel"
+                IsEnabled="False"
+                WidthRequest="100"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
