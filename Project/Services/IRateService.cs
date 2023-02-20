@@ -9,6 +9,6 @@ namespace Project.Services
 {
     public interface IRateService
     {
-        public IEnumerable<Rate> GetRatesAsync(DateTime date);
+        public IEnumerable<Rate> GetRates(DateTime date);
     }
 }

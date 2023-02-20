@@ -1,32 +1,92 @@
 using System.Text.Json;
 using System;
+using Project.Services;
+using Project.Entities;
 
 namespace Project;
 
 public partial class CurrencyConventer : ContentPage
 {
-	List<String> _currencies = new List<string>{ "Russian Ruble", "EURO", "US Dollar", "Swiss Franc", "Yuan China", "Pound Sterling" };
-	List<int> ids = new List<int> { 141, 19, 145, 130, 28, 143 };
+    List<String> _currencies = new List<string> { "Russian Ruble", "EURO",
+        "US Dollar", "Swiss Franc", "Yuan China", "Pound Sterling" };
 
-	
+    List<String> _currenciesAbreviations = new List<String> { "RUB", "EUR", "USD", "CHF", "CNY", "GBP" };
 
-	public CurrencyConventer()
-	{
-		InitializeComponent();
-	}
+    private IRateService _rateService;
+    private Rate _currentCurrency = null;
 
+    public CurrencyConventer(IRateService rateService)
+    {
+        InitializeComponent();
+        _rateService = rateService;
+    }
 
-	void WhenLoaded(object sender, EventArgs e)
-	{
-        CurrencyPicker.ItemsSource= _currencies;
+    void WhenLoaded(object sender, EventArgs e)
+    {
+        CurrencyPicker.ItemsSource = _currencies;
+        // CurrencyPicker.ItemsSource = CurrencyPicker.GetItemsAsArray();
+    }
+
+    void GetCurrencyRate(object sender, EventArgs e)
+    {
+        if (CurrencyPicker.SelectedItem != null)
+        {
+            ErrorMessageLabel.Text = "";
+            int index = CurrencyPicker.SelectedIndex;
+            if (DatePicker.Date > DateTime.Now)
+            {
+                ErrorMessageLabel.Text = "Incorrect date chosen!";
+                _currentCurrency = null;
+            } else
+            {
+                _currentCurrency = _rateService.GetRates(DatePicker.Date).Where(r => r.Cur_Abbreviation.Equals(_currenciesAbreviations[index])).First();
+                CurrencyLabel.Text = _currentCurrency.Cur_OfficialRate.ToString() + " " + _currentCurrency.Cur_Abbreviation;
+
+                ToCurrencyValue.Text = "??? " + _currentCurrency.Cur_Abbreviation;
+                CurrencyAbreviationLabel.Text = _currentCurrency.Cur_Abbreviation;
+            }
+        }
+        else
+        {
+            ErrorMessageLabel.Text = "Choose the currency first!";
+            _currentCurrency = null;
+        }
 
     }
 
 
-	void OnGetCurrencyClicled(object sender, EventArgs e)
-	{
-		int index = CurrencyPicker.SelectedIndex;
-		DateTime date = DatePicker.Date;
+    void OnConvertToCurrencyValueClicked(object sender, EventArgs e)
+    {
+        if (_currentCurrency != null)
+        {
+            try
+            {
+                var sum = double.Parse(ByEntry.Text);
+                ToCurrencyValue.Text = (sum * decimal.ToDouble(_currentCurrency.Cur_OfficialRate.Value)).ToString() + " " + _currentCurrency.Cur_Abbreviation;
+            }
+            catch
+            {
+                ErrorMessageLabel.Text = "Incorrect value in input of by sum!";
+            }
+            
+        }
+    }
 
+
+    void OnConvertToByValueClicked(object sender, EventArgs e)
+    {
+        if (_currentCurrency != null)
+        {
+            try
+            {
+                var sum = double.Parse(CurrencyEnry.Text);
+                ToByValue.Text = (sum / decimal.ToDouble(_currentCurrency.Cur_OfficialRate.Value)).ToString() + " BY";
+            }
+            catch
+            {
+                ErrorMessageLabel.Text = "Incorrect value in input of currency sum!";
+            }
+
+        }
     }
 }

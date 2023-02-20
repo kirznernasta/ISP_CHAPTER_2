@@ -18,6 +18,17 @@ public static class MauiProgram
         builder.Services.AddTransient<IDbService, SQLiteService>();
         builder.Services.AddSingleton<SQLiteDemo>();
 
+        var baseAddress = DeviceInfo.Platform == DevicePlatform.Android
+               ? "http://10.0.2.2:5091"
+               : "https://localhost:7091";
+
+        builder.Services.AddHttpClient<IRateService, RateService>(opt =>
+               opt.BaseAddress = new Uri(baseAddress));
+
+
+        builder.Services.AddTransient<IRateService, RateService>();
+        builder.Services.AddSingleton<CurrencyConventer>();
+
         return builder.Build();
 	}
 }

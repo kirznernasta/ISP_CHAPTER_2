@@ -4,47 +4,61 @@
              x:Class="Project.CurrencyConventer"
              Title="CurrencyConventer"
              Loaded="WhenLoaded">
-    <VerticalStackLayout
-        HorizontalOptions="Center">
-        <HorizontalStackLayout
-            Margin="0,40,0,0"
+    <VerticalStackLayout HorizontalOptions="Center"
+                         Spacing="100">
+        
+        <HorizontalStackLayout 
             Spacing="32"
             HorizontalOptions="Center">
-            <Picker
+            <Picker 
                 x:Name="CurrencyPicker"
-                Title="Choose currency"/>
-            <DatePicker
-                x:Name="DatePicker"></DatePicker>
+                Title="Choose currency"
+                SelectedIndexChanged="GetCurrencyRate"/>
+            <DatePicker 
+                x:Name="DatePicker"
+                DateSelected="GetCurrencyRate"
+                       />
         </HorizontalStackLayout>
-        <Button
-            Margin="0,40,0,40"
-            Text="Find out"/>
-        <HorizontalStackLayout
+
+        <HorizontalStackLayout 
             HorizontalOptions="Center"
-            Spacing="32">
-            <Label 
-                x:Name="ByLabel"
-                Text="1 BY"/>
-            <Label 
-                x:Name="CurrencyLabel"
-                Text="0.3 USD"/>
+            Spacing="72">
+            <Label x:Name="ByLabel"
+                   Text="1 BY" />
+            <Label x:Name="CurrencyLabel"
+                   Text="???" />
         </HorizontalStackLayout>
-        <HorizontalStackLayout
-            Margin="0,100,0,0"
-            HorizontalOptions="Center">
-            <Entry
+        
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Entry x:Name="ByEntry"
                 BackgroundColor="Aqua"
-                IsVisible="True"
-                Placeholder="Entry sum"/>
-            <Label Text="BY"
-                   Margin="10,0,40,0"/>
-            <Button Text="Convert"/>
-            <Label Text="21352651 USD"
-                   Margin="40,0,0,0"/>
+                   IsVisible="True"
+                   Placeholder="Entry sum"/>
+            <Label Text="BY"/>
+            <Button Text="Convert"
+                    Clicked="OnConvertToCurrencyValueClicked"/>
+            <Label x:Name="ToCurrencyValue"
+                   Text="???"/>
+        </HorizontalStackLayout>
+        
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Entry x:Name="CurrencyEnry"
+                BackgroundColor="Aqua"
+                   IsVisible="True"
+                   Placeholder="Entry sum"/>
+            <Label x:Name="CurrencyAbreviationLabel"
+                Text="???"/>
+            <Button Text="Convert"
+                    Clicked="OnConvertToByValueClicked"/>
+            <Label x:Name="ToByValue"
+                Text="??? BY"/>
 
 
         </HorizontalStackLayout>
-        <Label Text="Incorrect sum!"
+        
+        <Label x:Name="ErrorMessageLabel" 
+               TextColor="Red"
+            Text="Choose the currency first!"
                HorizontalOptions="Center"/>
 
 

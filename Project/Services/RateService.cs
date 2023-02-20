@@ -11,33 +11,27 @@ namespace Project.Services
 {
     public class RateService : IRateService
     {
-        /*public async Task<IEnumerable<Rate>> GetRates(DateTime date)
-        {
-            IEnumerable<Rate> data = await GetAllData(date);
-            return data.Where(r => r.Cur_Abbreviation == "RUB" || r.Cur_Abbreviation == "EUR" || r.Cur_Abbreviation == "EUR" || r.Cur_Abbreviation == "EUR" || r.Cur_Abbreviation == "EUR" || r.Cur_Abbreviation == "EUR");
+        private HttpClient _httpClient;
 
+        public RateService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
         }
 
-
-        private async Task<IEnumerable<Rate>> GetAllData(DateTime date) 
+        public IEnumerable<Rate> GetRates(DateTime date)
         {
-            var client = new HttpClient();
+            string uri = $"https://www.nbrb.by/api/exrates/rates/?ondate={date:yyyy-MM-dd}&periodicity=0";
 
-            var message = new HttpRequestMessage(HttpMethod.Get, $"https://www.nbrb.by/api/exrates/rates?ondate={date:yyyy-MM-dd}&periodicity=0"); 
+            var message = new HttpRequestMessage(HttpMethod.Get, uri);
             message.Headers.Add("Accept", "application/json");
-            //client.DefaultRequestHeaders.Accept
-            //.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var response = await client.SendAsync(message);
-            if (!response.IsSuccessStatusCode) throw new Exception("GET API ERROR!");
+            var response = _httpClient.SendAsync(message).Result;
+            if (!response.IsSuccessStatusCode) return null;
 
             StreamReader streamReader = new StreamReader(response.Content.ReadAsStream());
 
             return JsonSerializer.Deserialize<IEnumerable<Rate>>(
-                                                     streamReader.ReadToEnd()); ;
+                                                     streamReader.ReadToEnd());
         }
-*/
-
-
     }
 }
