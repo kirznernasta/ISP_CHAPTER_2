@@ -9,25 +9,38 @@
         
         <HorizontalStackLayout 
             Spacing="32"
-            HorizontalOptions="Center">
+            HorizontalOptions="Center"
+            Margin="0,16,0,0">
+            
+            
             <Picker 
                 x:Name="CurrencyPicker"
                 Title="Choose currency"
-                SelectedIndexChanged="GetCurrencyRate"/>
+                SelectedIndexChanged="GetCurrencyRate"
+                BackgroundColor="Lavender"
+                WidthRequest="200"
+                HorizontalTextAlignment="Center"/>
             <DatePicker 
                 x:Name="DatePicker"
-                DateSelected="GetCurrencyRate"
-                       />
+                DateSelected="GetCurrencyRate"                
+                BackgroundColor="Lavender"/>
         </HorizontalStackLayout>
 
-        <HorizontalStackLayout 
+        <Border
+            StrokeThickness="3"
+            StrokeShape="RoundRectangle 5,5,5,5">
+            <HorizontalStackLayout 
             HorizontalOptions="Center"
             Spacing="72">
-            <Label x:Name="ByLabel"
-                   Text="1 BY" />
-            <Label x:Name="CurrencyLabel"
-                   Text="???" />
-        </HorizontalStackLayout>
+                <Label x:Name="ByLabel"
+                       Text="1 BY" 
+                       FontSize="24"/>
+                <Label x:Name="CurrencyLabel"
+                       Text="???" 
+                       FontSize="24"/>
+            </HorizontalStackLayout>
+        </Border>
+        
         
         <HorizontalStackLayout HorizontalOptions="Center">
             <Entry x:Name="ByEntry"

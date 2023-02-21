@@ -16,6 +16,7 @@
                 Margin="5"
                 x:Name="JobTitlePicker"
                 Title="Select a job title"
+                SelectedItem="{Binding SelectedJob}"
                 SelectedIndexChanged="OnIndexChanged"
                 BackgroundColor="Azure"
                 TitleColor="Black"

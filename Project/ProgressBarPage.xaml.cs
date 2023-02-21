@@ -14,6 +14,7 @@ public partial class ProgressBarPage : ContentPage
         tokenSource = new CancellationTokenSource();
 
         ProcessLabel.Text = "Computing...";
+        ResultLabel.Text = "";
 
         StartButton.IsEnabled = false;
         CancelButton.IsEnabled = true;
@@ -22,10 +23,14 @@ public partial class ProgressBarPage : ContentPage
         { 
             await Task.Run(() => CalculateIntegral(), tokenSource.Token);
         }
-        catch (Exception ex) {
+        catch (OperationCanceledException ex) {
             ProgressBarIndecator.Progress = 0;
             ProgressResult.Text = $"0%";
             ProcessLabel.Text = "Canceled!";
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine($"EXCEPTION: {ex.Message}");
         }
 
         StartButton.IsEnabled = true;
@@ -81,6 +86,7 @@ public partial class ProgressBarPage : ContentPage
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 ProcessLabel.Text = "Completed!";
+                ResultLabel.Text = $"Integral from 0 to 1 of sin(x) is: {Math.Round(result, 4)}";
             });
 
         }

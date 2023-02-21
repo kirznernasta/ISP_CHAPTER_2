@@ -12,6 +12,7 @@ public partial class SQLiteDemo : ContentPage
 	{
 		InitializeComponent();
 		service = s;
+		BindingContext = this;
 	}
 
 	void WhenLoaded(object sender, EventArgs e)
@@ -26,11 +27,11 @@ public partial class SQLiteDemo : ContentPage
 	void OnIndexChanged(object sender, EventArgs e)
 	{
         var picker = sender as Picker;
-        int selectedIndex = picker.SelectedIndex;
+		int selectedIndex = picker.SelectedIndex + 1;
 
 
 		OfficialDuties
-			.ItemsSource = service.GetJobDuties(selectedIndex + 1).
+			.ItemsSource = service.GetJobDuties(selectedIndex).
 			Select(d => d.ToString());
 	}
 

@@ -5,7 +5,7 @@
              Title="ProgressBarPage">
     <VerticalStackLayout
         BackgroundColor="Lavender"
-        Spacing="240"
+        Spacing="160"
         VerticalOptions="FillAndExpand">
 
         <Label 
@@ -22,14 +22,19 @@
             <ProgressBar 
                 x:Name="ProgressBarIndecator"
                 WidthRequest="200"
-                Progress="0.0"
+                Progress="0"
                 ScaleY="2"
                 ProgressColor="LimeGreen"
                 HorizontalOptions="Center"/>
 
-            <Label x:Name="ProgressResult" Text="50%" TextColor="LimeGreen"/>
+            <Label x:Name="ProgressResult" Text="" TextColor="LimeGreen"/>
         </HorizontalStackLayout>
 
+        <Label x:Name="ResultLabel"
+               Text=""
+               TextColor="Black"
+               FontSize="16"
+               HorizontalOptions="Center"/>
 
         <HorizontalStackLayout
             Spacing="20"
@@ -48,5 +53,7 @@
                 IsEnabled="False"
                 WidthRequest="100"/>
         </HorizontalStackLayout>
+
+        
     </VerticalStackLayout>
 </ContentPage>
