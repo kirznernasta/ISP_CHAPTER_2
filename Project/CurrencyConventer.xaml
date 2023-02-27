@@ -42,29 +42,47 @@
         </Border>
         
         
-        <HorizontalStackLayout HorizontalOptions="Center">
+        <HorizontalStackLayout HorizontalOptions="Start">
             <Entry x:Name="ByEntry"
-                BackgroundColor="Aqua"
+                BackgroundColor="LightGray"
                    IsVisible="True"
-                   Placeholder="Entry sum"/>
-            <Label Text="BY"/>
+                   Placeholder="Entry sum"
+                   PlaceholderColor="Black"
+                   WidthRequest="100"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,0,8,0"/>
+            <Label Text="BY"
+                   VerticalTextAlignment="Center"
+                   Margin="0,0,40,0"/>
             <Button Text="Convert"
-                    Clicked="OnConvertToCurrencyValueClicked"/>
+                    Clicked="OnConvertToCurrencyValueClicked"
+                    Margin="0,0,40,0"/>
             <Label x:Name="ToCurrencyValue"
-                   Text="???"/>
+                   Text="???"
+                   VerticalTextAlignment="Center"
+                   FontSize="16"/>
         </HorizontalStackLayout>
         
-        <HorizontalStackLayout HorizontalOptions="Center">
+        <HorizontalStackLayout HorizontalOptions="Start">
             <Entry x:Name="CurrencyEnry"
-                BackgroundColor="Aqua"
+                   BackgroundColor="LightGray"
                    IsVisible="True"
-                   Placeholder="Entry sum"/>
+                   Placeholder="Entry sum"
+                   PlaceholderColor="Black"
+                   WidthRequest="100"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,0,8,0"/>
             <Label x:Name="CurrencyAbreviationLabel"
-                Text="???"/>
+                   Text="???"
+                   Margin="0,0,32,0"
+                   VerticalTextAlignment="Center"/>
             <Button Text="Convert"
-                    Clicked="OnConvertToByValueClicked"/>
+                    Clicked="OnConvertToByValueClicked"
+                    Margin="0,0,40,0"/>
             <Label x:Name="ToByValue"
-                Text="??? BY"/>
+                   Text="??? BY"
+                   VerticalTextAlignment="Center"
+                   FontSize="16"/>
 
 
         </HorizontalStackLayout>

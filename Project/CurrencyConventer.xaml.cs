@@ -63,6 +63,7 @@ public partial class CurrencyConventer : ContentPage
                 if (ByEntry.Text.Contains(',')) ByEntry.Text = ByEntry.Text.Replace(',', '.');
                 var sum = double.Parse(ByEntry.Text);
                 ToCurrencyValue.Text = (sum * decimal.ToDouble(_currentCurrency.Cur_OfficialRate.Value)).ToString("F2") + " " + _currentCurrency.Cur_Abbreviation;
+                ErrorMessageLabel.Text = "";
             }
             catch
             {
@@ -83,6 +84,7 @@ public partial class CurrencyConventer : ContentPage
                 if (CurrencyEnry.Text.Contains(',')) CurrencyEnry.Text = CurrencyEnry.Text.Replace(',', '.');
                 var sum = double.Parse(CurrencyEnry.Text);
                 ToByValue.Text = (sum / decimal.ToDouble(_currentCurrency.Cur_OfficialRate.Value)).ToString("F2") + " BY";
+                ErrorMessageLabel.Text = "";
             }
             catch
             {
