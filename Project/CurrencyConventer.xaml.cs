@@ -38,7 +38,7 @@ public partial class CurrencyConventer : ContentPage
             } else
             {
                 _currentCurrency = _rateService.GetRates(DatePicker.Date).Where(r => r.Cur_Abbreviation.Equals(_currenciesAbreviations[index])).First();
-                CurrencyLabel.Text = _currentCurrency.Cur_OfficialRate.ToString() + " " + _currentCurrency.Cur_Abbreviation;
+                CurrencyLabel.Text = ((double)(_currentCurrency.Cur_Scale / _currentCurrency.Cur_OfficialRate)).ToString("F2") + " " + _currentCurrency.Cur_Abbreviation;
 
                 ToCurrencyValue.Text = "??? " + _currentCurrency.Cur_Abbreviation;
                 CurrencyAbreviationLabel.Text = _currentCurrency.Cur_Abbreviation;
@@ -62,7 +62,7 @@ public partial class CurrencyConventer : ContentPage
                 // ???
                 if (ByEntry.Text.Contains(',')) ByEntry.Text = ByEntry.Text.Replace(',', '.');
                 var sum = double.Parse(ByEntry.Text);
-                ToCurrencyValue.Text = (sum * decimal.ToDouble(_currentCurrency.Cur_OfficialRate.Value)).ToString("F2") + " " + _currentCurrency.Cur_Abbreviation;
+                ToCurrencyValue.Text = (sum / decimal.ToDouble(_currentCurrency.Cur_OfficialRate.Value) * _currentCurrency.Cur_Scale).ToString("F2") + " " + _currentCurrency.Cur_Abbreviation;
                 ErrorMessageLabel.Text = "";
             }
             catch
@@ -83,7 +83,7 @@ public partial class CurrencyConventer : ContentPage
                 // ???
                 if (CurrencyEnry.Text.Contains(',')) CurrencyEnry.Text = CurrencyEnry.Text.Replace(',', '.');
                 var sum = double.Parse(CurrencyEnry.Text);
-                ToByValue.Text = (sum / decimal.ToDouble(_currentCurrency.Cur_OfficialRate.Value)).ToString("F2") + " BY";
+                ToByValue.Text = (sum * decimal.ToDouble(_currentCurrency.Cur_OfficialRate.Value) / _currentCurrency.Cur_Scale).ToString("F2") + " BY";
                 ErrorMessageLabel.Text = "";
             }
             catch

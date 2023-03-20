@@ -13,6 +13,7 @@
             BackgroundColor="Azure">
             
             <Picker 
+                
                 Margin="5"
                 x:Name="JobTitlePicker"
                 Title="Select a job title"
