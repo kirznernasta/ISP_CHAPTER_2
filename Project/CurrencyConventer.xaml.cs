@@ -22,7 +22,7 @@ public partial class CurrencyConventer : ContentPage
     void WhenLoaded(object sender, EventArgs e)
     {
         CurrencyPicker.ItemsSource = _currencies;
-        // CurrencyPicker.ItemsSource = CurrencyPicker.GetItemsAsArray();
+        CurrencyPicker.ItemsSource = CurrencyPicker.GetItemsAsArray();
     }
 
     void GetCurrencyRate(object sender, EventArgs e)
