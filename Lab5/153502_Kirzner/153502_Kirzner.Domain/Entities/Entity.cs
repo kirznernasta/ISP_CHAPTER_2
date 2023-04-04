@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace _153502_Kirzner.Domain.Entities
 {
-    internal class Entity
+    public abstract class Entity
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

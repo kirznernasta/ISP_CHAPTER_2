@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace _153502_Kirzner.Domain.Entities
 {
-    internal class EmployeePosition
+    public class EmployeePosition : Entity
     {
+        public double Salary { get; set; }
+        public List<JobDuty> JobDuties { get; set; }
     }
 }

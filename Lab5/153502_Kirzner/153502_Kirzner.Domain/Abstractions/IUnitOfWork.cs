@@ -9,8 +9,8 @@ namespace _153502_Kirzner.Domain.Abstractions
 {
     public interface IUnitOfWork
     {
-        IRepository<EmployeePosition> CourseRepository { get; }
-        IRepository<JobDuty> TraineeRepository { get; }
+        IRepository<EmployeePosition> EmployeePositionRepository { get; }
+        IRepository<JobDuty> JobDutyRepository { get; }
         public Task RemoveDatbaseAsync();
         public Task CreateDatabaseAsync();
         public Task SaveAllAsync();
