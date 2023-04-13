@@ -1,4 +1,4 @@
-﻿namespace _153502_Kirzner.Application
+﻿namespace _153502_Kirzner.ApplicationServices
 {
     // All the code in this file is included in all platforms.
     public class Class1

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_153502_Kirzner.UI.Pages.EmployeePositions"
+             Title="EmployeePositions"
+             xmlns:models="clr-namespace:_153502_Kirzner.UI.ViewModels"
+             x:DataType="models:EmployeePositionsViewModel"
+             BindingContext = "EmployeePositionsViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:ent="clr-namespace:_153502_Kirzner.Domain.Entities;assembly=153502_Kirzner.Domain"
+             xmlns:conv="clr-namespace:_153502_Kirzner.UI.ValueConverters">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior 
+            EventName="Loaded"
+            Command="{Binding UpdateGroupListCommand}"/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:DutyImportanceToColorValueConverter x:Key="QualityToColor"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout>
+        <Picker x:Name = "EmployeePositionsPicker" 
+                ItemsSource="{Binding EmployeePositions}"
+                ItemDisplayBinding="{Binding Name}" 
+                SelectedItem="{Binding SelectedEmployeePosition}"
+                TitleColor="Black"
+                Title="Select an employee position"
+                HorizontalTextAlignment="Center"
+                    BackgroundColor="White">
+            <Picker.Behaviors>
+                <toolkit:EventToCommandBehavior 
+                    EventName="SelectedIndexChanged"
+                    Command="{Binding UpdateMembersListCommand}"/>
+            </Picker.Behaviors>
+        </Picker>
+        <Border
+            Margin="1"
+            Padding="10"
+            StrokeThickness="3"
+            StrokeShape="RoundRectangle 10,10,10,10"
+            BackgroundColor="White">
+            <HorizontalStackLayout
+                    Margin="7">
+                <Label Text= "Salary:    " />
+                <Label Text = "{Binding SelectedEmployeePosition.Salary}"/>
+            </HorizontalStackLayout>
+        </Border>
+
+        <HorizontalStackLayout
+                    Margin="7">
+            <Label Text= "Duties:"/>
+        </HorizontalStackLayout>
+
+        <CollectionView x:Name="JobDutiesView" ItemsSource="{Binding JobDuties}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="ent:JobDuty">
+                    <Border
+                        Padding="5"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        BackgroundColor="{Binding DutyImportance, Converter={StaticResource QualityToColor}}">
+                        <Label Text= "{Binding Name}" BackgroundColor="{Binding DutyImportance, Converter={StaticResource QualityToColor}}" TextColor ="Black" />
+                    </Border>
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

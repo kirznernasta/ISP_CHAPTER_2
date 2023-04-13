@@ -11,5 +11,6 @@ namespace _153502_Kirzner.Domain.Entities
         public string Description { get; set; }
         public int Experience { get; set; }
         public int DutyImportance { get; set; }
+        public int EmployeePositionId { get; set; }
     }
 }

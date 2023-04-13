@@ -16,8 +16,8 @@ namespace _153502_Kirzner.Persistence.Repository
         public FakeEmployeePositionRepository()
         {
             _employeePositions = new List<EmployeePosition>() {
-                new EmployeePosition() { Id=1, Name= "Consultant", Salary=1000, JobDuties=new List<JobDuty>()},
-            new EmployeePosition() { Id = 1, Name = "Waiter", Salary = 1500, JobDuties = new List<JobDuty>() } };
+                new EmployeePosition() { Id=1, Name= "Consultant", Salary=1000, JobDuties=new List<JobDuty>() },
+            new EmployeePosition() { Id = 2, Name = "Waiter", Salary = 1500, JobDuties = new List<JobDuty>() } };
         }
         public Task AddAsync(EmployeePosition entity, CancellationToken cancellationToken = default)
         {

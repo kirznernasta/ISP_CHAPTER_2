@@ -26,6 +26,7 @@ namespace _153502_Kirzner.Persistence.Repository
                         Description = $"Description {i}.{j}",
                         Experience = i,
                         DutyImportance = j,
+                        EmployeePositionId = i % 2 + 1,
                     });
         }
         public Task AddAsync(JobDuty entity, CancellationToken cancellationToken = default)

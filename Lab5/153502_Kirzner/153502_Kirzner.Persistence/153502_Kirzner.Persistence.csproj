@@ -26,8 +26,4 @@
 	  <ProjectReference Include="..\153502_Kirzner.Domain\153502_Kirzner.Domain.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Новая папка\" />
-	</ItemGroup>
-
 </Project>
