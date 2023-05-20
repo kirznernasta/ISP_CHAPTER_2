@@ -1,5 +1,6 @@
 ﻿using _153502_Kirzner.ApplicationServices.Abstractions;
 using _153502_Kirzner.Domain.Entities;
+using _153502_Kirzner.UI.Pages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -33,7 +34,10 @@ namespace _153502_Kirzner.UI.ViewModels
 
         [RelayCommand]
         public async void UpdateMembersList() => await GetJobDuties();
-        public async Task GetEmployeePositions()
+
+        [RelayCommand]
+        async void ShowDetails(JobDuty jobDuty) => await GotoDetailsPage(jobDuty);
+        private async Task GetEmployeePositions()
         {
             var positions = await _employeePositionService.GetAllAsync();
             
@@ -47,7 +51,7 @@ namespace _153502_Kirzner.UI.ViewModels
             });
         }
 
-        public async Task GetJobDuties()
+        private async Task GetJobDuties()
         {
             var duties = await _jobDutyService.GetAllByImployeePositionIdAsync(SelectedEmployeePosition.Id);
             await MainThread.InvokeOnMainThreadAsync(() =>
@@ -58,6 +62,15 @@ namespace _153502_Kirzner.UI.ViewModels
                     JobDuties.Add(duty);
                 }
             });
+        }
+
+        private async Task GotoDetailsPage(JobDuty jobDuty)
+        {
+            IDictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                {"JobDuty", jobDuty }
+            };
+            await Shell.Current.GoToAsync(nameof(JobDutyDetails), parameters);
         }
     }
 }

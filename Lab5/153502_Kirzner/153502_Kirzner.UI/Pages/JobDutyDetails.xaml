@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_153502_Kirzner.UI.Pages.JobDutyDetails"
+             Title="JobDutyDetails"
+             xmlns:models="clr-namespace:_153502_Kirzner.UI.ViewModels"
+             x:DataType="models:JobDutyDetailsViewModel"
+             BindingContext = "JobDutyDetailsViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:ent="clr-namespace:_153502_Kirzner.Domain.Entities;assembly=153502_Kirzner.Domain"
+             xmlns:conv="clr-namespace:_153502_Kirzner.UI.ValueConverters">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:DutyImportanceToColorValueConverter x:Key="QualityToColor"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout BackgroundColor="{Binding CurrentJobDuty.DutyImportance, Converter={StaticResource QualityToColor}}">
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Label 
+                HorizontalOptions="Center"
+                Text="Job Duty #"
+                />
+            <Label 
+                Text= "{Binding CurrentJobDuty.Id}" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Start" Margin="10, 0 , 0, 0">
+            <Label 
+                HorizontalOptions="Center"
+                Text="Name: "
+                />
+            <Label 
+                Text= "{Binding CurrentJobDuty.Name}" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Start" Margin="10, 0 , 0, 0">
+            <Label 
+                HorizontalOptions="Center"
+                Text="Description: "
+                />
+            <Label 
+                Text= "{Binding CurrentJobDuty.Description}" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Start" Margin="10, 0 , 0, 0">
+            <Label 
+                HorizontalOptions="Center"
+                Text="Experience: "
+                />
+            <Label 
+                Text= "{Binding CurrentJobDuty.Experience}" />
+            <Label 
+                Text= " y." />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Start" Margin="10, 0 , 0, 0">
+            <Label 
+                HorizontalOptions="Center"
+                Text="Duty importance: "
+                />
+            <Label 
+                Text= "{Binding CurrentJobDuty.DutyImportance}" />
+            <Label 
+                Text= " of 10" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Start" Margin="10, 0 , 0, 0">
+            <Label 
+                HorizontalOptions="Center"
+                Text="Employee position id: "
+                />
+            <Label 
+                Text= "{Binding CurrentJobDuty.EmployeePositionId}" />
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

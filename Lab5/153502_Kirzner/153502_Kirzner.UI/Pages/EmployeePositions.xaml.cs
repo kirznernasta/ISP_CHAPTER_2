@@ -8,8 +8,8 @@ public partial class EmployeePositions : ContentPage
     public EmployeePositions(EmployeePositionsViewModel viewModel)
 	{
         InitializeComponent();
-        _viewModel = viewModel;
 
-        this.BindingContext= _viewModel;
+        _viewModel = viewModel;
+        BindingContext = _viewModel;
     }
 }
