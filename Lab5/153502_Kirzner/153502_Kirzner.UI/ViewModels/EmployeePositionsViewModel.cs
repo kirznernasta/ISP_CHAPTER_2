@@ -29,6 +29,9 @@ namespace _153502_Kirzner.UI.ViewModels
         [ObservableProperty]
         EmployeePosition selectedEmployeePosition;
 
+        [ObservableProperty]
+        bool employeePositionSelected = false;
+
         [RelayCommand]
         public async void UpdateGroupList() => await GetEmployeePositions();
 
@@ -37,6 +40,13 @@ namespace _153502_Kirzner.UI.ViewModels
 
         [RelayCommand]
         async void ShowDetails(JobDuty jobDuty) => await GotoDetailsPage(jobDuty);
+
+        [RelayCommand]
+        public async void AddNewEmployeePosition() => await CreateEmployeePosition();
+
+        [RelayCommand]
+        public async void AddNewJobDuty() => await CreateJobDuty();
+
         private async Task GetEmployeePositions()
         {
             var positions = await _employeePositionService.GetAllAsync();
@@ -53,6 +63,7 @@ namespace _153502_Kirzner.UI.ViewModels
 
         private async Task GetJobDuties()
         {
+            EmployeePositionSelected = true;
             var duties = await _jobDutyService.GetAllByImployeePositionIdAsync(SelectedEmployeePosition.Id);
             await MainThread.InvokeOnMainThreadAsync(() =>
             {
@@ -71,6 +82,14 @@ namespace _153502_Kirzner.UI.ViewModels
                 {"JobDuty", jobDuty }
             };
             await Shell.Current.GoToAsync(nameof(JobDutyDetails), parameters);
+        }
+        private async Task CreateEmployeePosition()
+        {
+            await Shell.Current.GoToAsync(nameof(ManagingEmployeePosition));
+        }
+        private async Task CreateJobDuty()
+        {
+            await Shell.Current.GoToAsync(nameof(ManagingDuty));
         }
     }
 }

@@ -45,10 +45,14 @@ public static class MauiProgram
         //Pages
         services.AddSingleton<EmployeePositions>();
         services.AddTransient<JobDutyDetails>();
+        services.AddTransient<ManagingDuty>();
+        services.AddTransient<ManagingEmployeePosition>();
 
         //ViewModels
         services.AddSingleton<EmployeePositionsViewModel>();
         services.AddTransient<JobDutyDetailsViewModel>();
+        services.AddTransient<ManagingDutyViewModel>();
+        services.AddTransient<ManagingEmployeePositionViewModel>();
 
     }
 

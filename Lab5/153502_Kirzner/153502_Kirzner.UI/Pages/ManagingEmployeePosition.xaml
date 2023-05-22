@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_153502_Kirzner.UI.Pages.ManagingEmployeePosition"
+             Title="{Binding Title}"
+             xmlns:models="clr-namespace:_153502_Kirzner.UI.ViewModels"
+             x:DataType="models:ManagingEmployeePositionViewModel"
+             BindingContext = "ManagingEmployeePositionViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:ent="clr-namespace:_153502_Kirzner.Domain.Entities;assembly=153502_Kirzner.Domain">
+
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout VerticalOptions="Center"
+                         Spacing="56"
+                         HorizontalOptions="Center">
+        <HorizontalStackLayout Spacing="8">
+            <Label Text="Name:"
+                   Margin="0, 16, 0, 0"/>
+            <Entry BackgroundColor="LightGray"
+                   IsVisible="True"
+                   Placeholder="{Binding EditingEmployeePosition.Name}"
+                   PlaceholderColor="Black"
+                   WidthRequest="100"
+                   HorizontalTextAlignment="Center"
+                   x:Name="NameEntry"
+                   Margin="0,0,8,0"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Spacing="8" Margin="0, 0, 48, 0">
+            <Label Text="Salary:"
+                   Margin="0, 16, 0, 0"/>
+            <Entry BackgroundColor="LightGray"
+                   IsVisible="True"
+                   Placeholder="{Binding EditingEmployeePosition.Salary}"
+                   PlaceholderColor="Black"
+                   WidthRequest="100"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,0,8,0"
+                   x:Name="SalaryEntry">
+                <Entry.Behaviors>
+                    <toolkit:TextValidationBehavior InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                                    ValidStyle="{StaticResource ValidEntryStyle}"
+                                                    Flags="ValidateOnValueChanged" 
+                                                    MinimumLength="1"
+                                                    MaximumLength="10"/>
+                </Entry.Behaviors>
+            </Entry>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Button Text="Apply" Command="{Binding ApplyPressedCommand}"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Label Text="{Binding Success}"/>
+        </HorizontalStackLayout>
+       
+    </VerticalStackLayout>
+</ContentPage>
